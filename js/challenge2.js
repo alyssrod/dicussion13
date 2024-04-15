@@ -1,19 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const textarea = document.querySelector('textarea');
+    const textarea = document.getElementById('billing');  
     if (textarea) {
-        console.log(textarea.value);
+        console.log(textarea.value.trim());  
     } else {
         console.error('Textarea not found!');
     }
 
-    const addressCheckbox = document.getElementById('your-checkbox-id');  
-    const billingAddress = document.getElementById('billing-address-id');  
-    const homeAddress = document.getElementById('home-address-id');  
-
-    if (addressCheckbox && billingAddress && homeAddress) {
+    const addressCheckbox = document.querySelector('input[type="checkbox"][name="useBilling"]');  
+    const homeAddress = document.getElementById('home'); 
+    
+    if (addressCheckbox && homeAddress) {
         addressCheckbox.addEventListener('change', function() {
             if (addressCheckbox.checked) {
-                homeAddress.value = billingAddress.value;
+                homeAddress.value = textarea.value;
                 homeAddress.disabled = true;
             } else {
                 homeAddress.value = '';
@@ -22,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     } else {
         if (!addressCheckbox) console.error('Checkbox for address not found!');
-        if (!billingAddress) console.error('Billing address field not found!');
         if (!homeAddress) console.error('Home address field not found!');
     }
 });
