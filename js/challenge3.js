@@ -1,44 +1,45 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const captions = document.querySelectorAll('figure caption');
+ document.addEventListener('DOMContentLoaded', function() {
+    const captions = document.querySelectorAll('figure figcaption');
     if (captions.length > 1) {  
-        const secondCaption = captions[1];
-        alert(secondCaption.textContent);
+        alert(captions[1].textContent);  
     } else {
         console.error('Second caption not found!');
     }
 
-    const images = document.querySelectorAll('img');
+    const images = document.querySelectorAll('img.thumbnail');
+    const displayDiv = document.getElementById('display'); 
+
     images.forEach(image => {
         image.addEventListener('mouseover', function() {
-            const displayText = document.getElementById('display-text-id'); 
-            if (displayText) {
-                document.body.style.backgroundImage = `url(${image.src})`;
-                displayText.textContent = image.alt;
+            if (displayDiv) {
+                displayDiv.style.backgroundImage = `url(${image.src})`;
+                displayDiv.textContent = image.alt;
                 image.style.visibility = 'hidden';
-            } else {
-                console.error('Display text element not found!');
             }
         });
 
         image.addEventListener('mouseout', function() {
-            document.body.style.background = 'blue';  
-            image.style.visibility = 'visible';
+            if (displayDiv) {
+                displayDiv.style.background = '';  
+                displayDiv.textContent = 'Hover over an image below to display the image and the alt text.';
+                image.style.visibility = 'visible';
+            }
         });
 
         image.addEventListener('focus', function() {  
-            const displayText = document.getElementById('display-text-id'); 
-            if (displayText) {
-                document.body.style.backgroundImage = `url(${image.src})`;
-                displayText.textContent = image.alt;
+            if (displayDiv) {
+                displayDiv.style.backgroundImage = `url(${image.src})`;
+                displayDiv.textContent = image.alt;
                 image.style.visibility = 'hidden';
-            } else {
-                console.error('Display text element not found!');
             }
         });
 
         image.addEventListener('blur', function() {  
-            document.body.style.background = 'blue';
-            image.style.visibility = 'visible';
+            if (displayDiv) {
+                displayDiv.style.background = '';
+                displayDiv.textContent = 'Hover over an image below to display the image and the alt text.';
+                image.style.visibility = 'visible';
+            }
         });
     });
 });
