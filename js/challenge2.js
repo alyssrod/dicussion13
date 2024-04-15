@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Textarea not found!');
     }
 
-    const addressCheckbox = document.querySelector('input[type="checkbox"][name="useBilling"]');  
-    const homeAddress = document.getElementById('home'); 
+    const addressCheckbox = document.querySelector('input[type="checkbox"][name="useBilling"]'); 
+    const homeAddress = document.getElementById('home');  
     
     if (addressCheckbox && homeAddress) {
         addressCheckbox.addEventListener('change', function() {
