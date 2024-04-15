@@ -1,13 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const secondCaption = document.querySelectorAll('figure caption')[1]; 
-    alert(secondCaption.textContent);
+    const captions = document.querySelectorAll('figure caption');
+    if (captions.length > 1) {  
+        const secondCaption = captions[1];
+        alert(secondCaption.textContent);
+    } else {
+        console.error('Second caption not found!');
+    }
 
     const images = document.querySelectorAll('img');
     images.forEach(image => {
         image.addEventListener('mouseover', function() {
-            document.body.style.backgroundImage = `url(${image.src})`;
-            document.getElementById('display-text-id').textContent = image.alt;  
-            image.style.visibility = 'hidden';
+            const displayText = document.getElementById('display-text-id'); 
+            if (displayText) {
+                document.body.style.backgroundImage = `url(${image.src})`;
+                displayText.textContent = image.alt;
+                image.style.visibility = 'hidden';
+            } else {
+                console.error('Display text element not found!');
+            }
         });
 
         image.addEventListener('mouseout', function() {
@@ -16,12 +26,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         image.addEventListener('focus', function() {  
-            document.body.style.backgroundImage = `url(${image.src})`;
-            document.getElementById('display-text-id').textContent = image.alt;  
-            image.style.visibility = 'hidden';
+            const displayText = document.getElementById('display-text-id'); 
+            if (displayText) {
+                document.body.style.backgroundImage = `url(${image.src})`;
+                displayText.textContent = image.alt;
+                image.style.visibility = 'hidden';
+            } else {
+                console.error('Display text element not found!');
+            }
         });
 
-        image.addEventListener('blur', function() { 
+        image.addEventListener('blur', function() {  
             document.body.style.background = 'blue';
             image.style.visibility = 'visible';
         });
