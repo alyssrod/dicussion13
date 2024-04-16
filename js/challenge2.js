@@ -1,26 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const textarea = document.getElementById('billing');  
-    if (textarea) {
-        console.log(textarea.value.trim());  
+    const billingLabel = document.querySelector('label[for="bill"]');
+    const billingTextArea = document.getElementById('billing');
+    if (billingLabel && billingTextArea) {
+        billingLabel.addEventListener('click', function() {
+            billingTextArea.focus();  
+        });
     } else {
-        console.error('Textarea not found!');
+        console.error('Billing label or textarea not found!');
     }
 
-    const addressCheckbox = document.querySelector('input[type="checkbox"][name="useBilling"]'); 
-    const homeAddress = document.getElementById('home');  
-    
-    if (addressCheckbox && homeAddress) {
+    const homeLabel = document.querySelector('label[for="home"]');
+    const homeTextArea = document.getElementById('home');
+    if (homeLabel && homeTextArea) {
+        homeLabel.addEventListener('click', function() {
+            homeTextArea.focus(); 
+        });
+    } else {
+        console.error('Home label or textarea not found!');
+    }
+
+    const addressCheckbox = document.querySelector('input[name="useBilling"]');
+    if (addressCheckbox && homeTextArea && billingTextArea) {
         addressCheckbox.addEventListener('change', function() {
             if (addressCheckbox.checked) {
-                homeAddress.value = textarea.value;
-                homeAddress.disabled = true;
+                homeTextArea.value = billingTextArea.value;
+                homeTextArea.disabled = true;
             } else {
-                homeAddress.value = '';
-                homeAddress.disabled = false;
+                homeTextArea.value = '';
+                homeTextArea.disabled = false;
             }
         });
     } else {
         if (!addressCheckbox) console.error('Checkbox for address not found!');
-        if (!homeAddress) console.error('Home address field not found!');
+        if (!homeTextArea) console.error('Home address field not found!');
+        if (!billingTextArea) console.error('Billing address field not found!');
     }
 });
